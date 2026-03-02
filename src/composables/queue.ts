@@ -68,9 +68,9 @@ export const provideQueue = (token: MaybeRef<string>, preset: MaybeRef<string>) 
     const buff = await target.file.arrayBuffer()
     target.progress = 12
     const progressLerp = setInterval(() => {
-      target.progress += (80 - target.progress) * 0.05
-      if(target.progress > 79.99999) clearInterval(progressLerp)
-    }, 820)
+      target.progress += (95 - target.progress) * 0.012
+      if(target.progress > 94.99999) clearInterval(progressLerp)
+    }, 420)
 
     try {
       const headers: { [key: string]: string } = {
@@ -84,15 +84,12 @@ export const provideQueue = (token: MaybeRef<string>, preset: MaybeRef<string>) 
         headers,
         body: buff
       })
-      if(target.progress < 70)
-        target.progress = 70
       if(!res.ok) throw new Error('Processing failed')
       const blob = await res.blob()
       target.url = URL.createObjectURL(blob)
       clearTimeout(progressLerp)
-      target.progress = 80
       downloadUrl(target.url, target.file.name.replace('.pdf', 'c.pdf'))
-      target.progress = 90
+      target.progress = 95
       target.result = blob
     } catch(err) {
       target.error = true
