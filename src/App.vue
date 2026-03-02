@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import FileInput from '@/components/FileInput.vue';
-import Queue from '@/components/Queue.vue';
-import { ref, useTemplateRef } from 'vue';
-import { provideQueue } from './composables/queue';
-import { useLocalStorage } from './composables/localStorage';
+import FileInput from '@/components/FileInput.vue'
+import Queue from '@/components/Queue.vue'
+import Dropdown from '@/components/Dropdown.vue'
+import { ref, useTemplateRef } from 'vue'
+import { provideQueue } from './composables/queue'
+import { useLocalStorage } from './composables/localStorage'
 
 const dragActive = ref(false)
 const token = useLocalStorage('tkn', '')
+const preset = useLocalStorage('preset', 'printer')
 
 const fileInput = useTemplateRef('fileInput')
-const queue = provideQueue(token)
+const queue = provideQueue(token, preset)
 
 const openFileDialog = () => {
   fileInput.value?.click()
@@ -24,6 +26,13 @@ const onDrop = (event: DragEvent) => {
 const onFileInput = () => {
   const files = Array.from(fileInput.value?.files || [])
   queue.addFiles(files)
+}
+
+const qualityPresets = {
+  screen: 'Tiny',
+  ebook: 'Small',
+  printer: 'Normal',
+  prepress: 'Large'
 }
 
 </script>
@@ -42,8 +51,12 @@ const onFileInput = () => {
           <img src="/assets/logo.png" alt="logo" class="max-h-12 mt-[20vh] mb-4 pointer-events-none select-none">
         </div>
         <FileInput @open="openFileDialog" :active="dragActive" />
-        <div class="min-w-64 text-base">
-          <input v-model="token" type="text" placeholder="Token" class="px-2 py-1 border border-slate-300/20 rounded w-full text-xs" />
+        <div class="flex gap-2 text-xs">
+          <div class="relative min-w-64">
+            <input v-model="token" type="text" placeholder="Token" class="px-2 py-1 border border-slate-300/20 rounded w-full" />
+            <img v-if="token && token.length > 24" src="/assets/check.png" alt="check" class="absolute top-1/2 -translate-y-1/2 size-4 -left-6 rounded-md">
+          </div>
+          <Dropdown :options="qualityPresets" v-model="preset" />
         </div>
         <Queue />
       </div>

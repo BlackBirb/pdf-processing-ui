@@ -36,7 +36,7 @@ const emit = defineEmits(['remove'])
         {{ props.item.file.name }}
       </p>
       <div class="grow" />
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-400 whitespace-nowrap">
         {{ formatBytes(props.item.file.size) }}
       </p>
       <a

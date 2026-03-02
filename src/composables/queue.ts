@@ -26,8 +26,7 @@ const downloadUrl = (url: string, filename: string) => {
 }
 
 const injectionKey = Symbol('queue')
-export const provideQueue = (token: MaybeRef<string>) => {
-
+export const provideQueue = (token: MaybeRef<string>, preset: MaybeRef<string>) => {
   const stagingFiles = ref<QueueItem[]>([])
 
   const addFiles = (files: File[]) => {
@@ -75,7 +74,7 @@ export const provideQueue = (token: MaybeRef<string>) => {
       if(unref(token)) {
         headers['Authorization'] = 'Bearer ' + unref(token)
       }
-      const res = await fetch('/process/inline', {
+      const res = await fetch('/process/inline?preset=' + unref(preset), {
         method: 'POST',
         headers,
         body: buff

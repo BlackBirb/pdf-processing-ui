@@ -2,7 +2,7 @@ import { computed, onBeforeUnmount, onMounted, shallowReactive, shallowRef, watc
 
 export const useLocalStorage = <T = null>(key: string, defaultValue?: T): ShallowRef<T> => {
 
-  const data = shallowRef<T>((defaultValue || null) as T)
+  const data = shallowRef<T>(JSON.stringify(defaultValue || null) as T)
 
   const onStorageEvent = (evn: StorageEvent) => {
     if(evn.storageArea !== localStorage || evn.key !== key)
@@ -13,7 +13,9 @@ export const useLocalStorage = <T = null>(key: string, defaultValue?: T): Shallo
 
   onMounted(() => {
     window.addEventListener('storage', onStorageEvent, { passive: true })
-    data.value = localStorage.getItem(key)
+    const storedValue = localStorage.getItem(key)
+    if(storedValue)
+      data.value = storedValue
   })
 
   onBeforeUnmount(() => {
