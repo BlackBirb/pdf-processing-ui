@@ -1,6 +1,8 @@
-# compression-vue
+# PDF Processing UI
 
-Quick small front-end for running compression on PDF files via other services.
+Quick small front-end for running processing tasks on PDF files via api's.
+Has queues, (faked) progress bars, quality options and authentication with bearer tokens.
+Originally set up to use [PDF Ghostpress](https://hub.docker.com/r/blackbirdapp/pdf-ghostpress) but probably could work with other backends.
 
 ## Project Setup
 
