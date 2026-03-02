@@ -7,7 +7,7 @@ const { removeFile, items } = useQueue()
 
 <template>
   <div class="mt-6 w-full max-w-md mx-auto text-left">
-    <p class="hiddentext-xs uppercase tracking-wide text-slate-400">Files</p>
+    <p class="hiddentext-xs uppercase tracking-wide text-neutral-400">Files</p>
     <ul class="mt-2 space-y-4">
       <li v-for="item in items" :key="item.file.name" class="relative">
         <QueueItem

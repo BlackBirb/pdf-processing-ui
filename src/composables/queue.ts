@@ -77,7 +77,7 @@ export const provideQueue = (token: MaybeRef<string>, preset: MaybeRef<string>) 
         'Content-Type': 'application/pdf',
       }
       if(unref(token)) {
-        headers['Authorization'] = 'Bearer ' + unref(token)
+        headers['Authorization'] = 'Bearer ' + unref(token).trim()
       }
       const res = await fetch('/process/inline?quality=' + unref(preset), {
         method: 'POST',
