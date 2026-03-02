@@ -31,23 +31,23 @@ const emit = defineEmits(['remove'])
         </svg>
       </div>
     </div>
-    <div class="w-full relative flex items-center gap-3 px-3 py-2 text-sm">
-      <p class="truncate text-slate-100">
+    <div class="w-full relative flex items-center gap-3 px-3 py-2 text-sm backdrop-blur text-white">
+      <p class="truncate">
         {{ props.item.file.name }}
       </p>
       <div class="grow" />
-      <p class="text-xs text-slate-400 whitespace-nowrap">
+      <p class="text-xs text-neutral-400 whitespace-nowrap">
         {{ formatBytes(props.item.file.size) }}
       </p>
       <a
         v-if="props.item.done && !props.item.error"
-        class="shrink-0 rounded-md border border-slate-600 px-2 py-1 text-xs text-slate-200 hover:border-slate-400 hover:text-white cursor-pointer"
+        class="shrink-0 rounded-md border border-neutral-600 px-2 py-1 text-xs hover:border-neutral-400 hover:text-white cursor-pointer"
         :href="props.item.url"
         :download="props.item.file.name.replace('.pdf', 'c.pdf')"
       >
         Download
       </a>
-      <button class="shrink-0 rounded-md border border-slate-600 px-2 py-1 text-xs text-slate-200 hover:border-slate-400 hover:text-white cursor-pointer" @click="emit('remove')">
+      <button class="shrink-0 rounded-md border border-neutral-600 px-2 py-1 text-xs hover:border-neutral-400 hover:text-white cursor-pointer" @click="emit('remove')">
         ×
       </button>
       <div class="absolute top-0 left-0 w-full rounded-lg overflow-hidden h-full pointer-events-none select-none">

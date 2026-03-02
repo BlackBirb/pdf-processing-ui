@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="px-6 py-6 cursor-pointer text-center rounded-xl border border-dashed"
+  <div class="px-6 py-6 cursor-pointer text-center rounded-xl border border-dashed backdrop-blur"
     :class="[
       props.active ? 'border-blue-400' : 'border-transparent',
     ]"

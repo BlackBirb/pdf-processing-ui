@@ -60,7 +60,7 @@ const qualityPresets = {
         <FileInput @open="openFileDialog" :active="dragActive" />
         <div class="flex gap-2 text-xs">
           <div class="relative min-w-64">
-            <input v-model="token" type="text" placeholder="Token" class="px-2 py-1 border border-slate-300/20 rounded w-full" />
+            <input v-model="token" type="text" placeholder="Token" class="px-2 py-1 border border-slate-300/20 rounded w-full backdrop-blur" />
             <img v-if="tokenValid" title="I make sure the token is Quack!" src="/assets/check.png" alt="check" class="absolute top-1/2 -translate-y-1/2 size-4 -left-6 rounded-md select-none">
           </div>
           <Dropdown :options="qualityPresets" v-model="preset" />

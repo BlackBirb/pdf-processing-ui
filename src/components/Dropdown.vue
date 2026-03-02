@@ -1,9 +1,9 @@
 <template>
   <div class="relative w-18">
     <div
-      class="flex justify-between items-center px-2 py-1 border border-slate-300/20 rounded cursor-pointer select-none"
+      class="flex justify-between items-center px-2 py-1 border border-slate-300/20 rounded cursor-pointer select-none backdrop-blur"
       :class="open ? 'rounded-b-none' : ''"
-      @click="open = !open"
+      @mouseup.stop="open = !open"
     >
       <div>{{ options[model] }}</div>
       <div>
@@ -18,7 +18,7 @@
         </svg>
       </div>
     </div>
-    <ul v-if="open" class="absolute top-full left-0 right-0 cursor-pointer border border-slate-300/20 border-t-0 rounded-b bg-neutral-700/80" @mousedown.stop="onSelect">
+    <ul v-if="open" class="absolute backdrop-blur top-full left-0 right-0 cursor-pointer border border-slate-300/20 border-t-0 rounded-b bg-neutral-700/40" @mouseup.stop="onSelect">
       <li
         v-for="(label, key) in props.options"
         :key="key"
@@ -53,14 +53,14 @@ const onSelect = (evn: MouseEvent) => {
   open.value = false
 }
 
-const onMouseDown = () => {
+const onMouseUp = () => {
   open.value = false
 }
 
 onMounted(() => {
-  window.document.body.addEventListener('mousedown', onMouseDown)
+  window.document.body.addEventListener('mouseup', onMouseUp)
 })
 onBeforeUnmount(() => {
-  window.document.body.removeEventListener('mousedown', onMouseDown)
+  window.document.body.removeEventListener('mouseup', onMouseUp)
 })
 </script>
