@@ -5,9 +5,10 @@ import { ref, useTemplateRef } from 'vue';
 import { provideQueue } from './composables/queue';
 
 const dragActive = ref(false)
+const token = ref('')
 
 const fileInput = useTemplateRef('fileInput')
-const queue = provideQueue()
+const queue = provideQueue(token)
 
 const openFileDialog = () => {
   fileInput.value?.click()
@@ -37,10 +38,12 @@ const onFileInput = () => {
     >
       <div class="min-h-dvh w-full flex flex-col items-center select-none">
         <FileInput @open="openFileDialog" :active="dragActive" />
+        <div class="min-w-64 text-base">
+          <input v-model="token" type="text" placeholder="Token" class="px-2 py-1 border border-slate-300/20 rounded w-full text-xs" />
+        </div>
         <Queue />
       </div>
       <input ref="fileInput" accept="application/pdf" type="file" class="hidden" multiple @change="onFileInput" />
     </div>
   </div>
 </template>
-

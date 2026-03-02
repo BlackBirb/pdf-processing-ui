@@ -1,4 +1,4 @@
-import { inject, provide, ref, shallowRef, type Ref } from "vue"
+import { inject, provide, ref, shallowRef, unref, type MaybeRef, type Ref } from "vue"
 
 type QueueItem = {
   progress: number,
@@ -26,7 +26,7 @@ const downloadUrl = (url: string, filename: string) => {
 }
 
 const injectionKey = Symbol('queue')
-export const provideQueue = () => {
+export const provideQueue = (token: MaybeRef<string>) => {
 
   const stagingFiles = ref<QueueItem[]>([])
 
@@ -69,11 +69,15 @@ export const provideQueue = () => {
     const buff = await target.file.arrayBuffer()
     target.progress = 12
     try {
+      const headers: { [key: string]: string } = {
+        'Content-Type': 'application/pdf',
+      }
+      if(unref(token)) {
+        headers['Authorization'] = 'Bearer ' + unref(token)
+      }
       const res = await fetch('/process/inline', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/pdf',
-        },
+        headers,
         body: buff
       })
       target.progress = 30
