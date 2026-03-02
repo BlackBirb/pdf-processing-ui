@@ -8,9 +8,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="px-6 py-6 mt-[35dvh] cursor-pointer text-center rounded-xl border border-dashed"
+  <div class="px-6 py-6 cursor-pointer text-center rounded-xl border border-dashed"
     :class="[
-      props.active ? 'border-blue-400' : 'border-none',
+      props.active ? 'border-blue-400' : 'border-transparent',
     ]"
     @click="emit('open')">
     <p class="text-lg sm:text-xl font-semibold tracking-tight">
