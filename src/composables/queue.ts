@@ -74,7 +74,7 @@ export const provideQueue = (token: MaybeRef<string>, preset: MaybeRef<string>) 
       if(unref(token)) {
         headers['Authorization'] = 'Bearer ' + unref(token)
       }
-      const res = await fetch('/process/inline?preset=' + unref(preset), {
+      const res = await fetch('/process/inline?quality=' + unref(preset), {
         method: 'POST',
         headers,
         body: buff
