@@ -66,6 +66,10 @@ const qualityPresets = {
           <Dropdown :options="qualityPresets" v-model="preset" />
         </div>
         <Queue />
+        <div class="grow" />
+        <div class="text-center text-xs p-2 text-neutral-200/60">
+          This app uses Ghostscript which is licensed under AGPL. To comply with the license, the source code of this project can be found <a class="underline" href="https://github.com/BlackBirb/pdf-processing-ui">here</a> and <a class="underline" href="https://github.com/BlackBirb/pdf-ghostpress">here</a>.
+        </div>
       </div>
       <input ref="fileInput" accept="application/pdf" type="file" class="hidden" multiple @change="onFileInput" />
     </div>
